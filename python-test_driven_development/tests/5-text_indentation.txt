@@ -1,0 +1,47 @@
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+# No separators: prints once, no trailing newline
+>>> text_indentation("Holberton School")
+Holberton School
+
+# Single separator: blank line after the segment, no trailing newline at end
+>>> text_indentation("Holberton.School")
+Holberton.
+<BLANKLINE>
+School
+
+# Multiple separators and spaces after them
+>>> text_indentation("Holberton. School? How are you: John")
+Holberton.
+<BLANKLINE>
+School?
+<BLANKLINE>
+How are you:
+<BLANKLINE>
+John
+
+# Trim spaces around separators (fixes 'A .', 'B ?' etc.)
+>>> text_indentation(" A . B ? C : D ")
+A.
+<BLANKLINE>
+B?
+<BLANKLINE>
+C:
+<BLANKLINE>
+D
+
+# Leading/trailing spaces trimmed per printed line
+>>> text_indentation("  A  .   B   ?   C   :   D   ")
+A.
+<BLANKLINE>
+B?
+<BLANKLINE>
+C:
+<BLANKLINE>
+D
+
+# Type validation
+>>> text_indentation(12)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
