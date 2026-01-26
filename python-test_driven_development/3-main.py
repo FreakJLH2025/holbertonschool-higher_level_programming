@@ -8,12 +8,3 @@ try:
     say_my_name(12, "White")
 except Exception as e:
     print(e)
-
-guillaume@ubuntu:~/$ ./3-main.py | cat -e
-My name is John Smith$
-My name is Walter White$
-My name is Bob $
-first_name must be a string$
-guillaume@ubuntu:~/$ python3 -m doctest -v ./tests/3-say_my_name.txt | tail -2
-5 passed and 0 failed.
-Test passed.
