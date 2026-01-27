@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 """
-This module defines an empty Square class.
+This module defines an empty class Square.
+The purpose of this class is to serve as a
+blueprint for future implementations of a square.
 """
 
 
 class Square:
     """
-    An empty class that defines a square.
-    
-    This class currently doesn't have any attributes or methods.
-    It serves as a placeholder for a square object.
+    This is an empty class that defines a square.
+    It does not have attributes or methods yet,
+    but it establishes the structure for later use.
     """
     pass
