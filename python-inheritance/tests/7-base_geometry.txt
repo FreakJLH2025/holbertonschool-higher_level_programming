@@ -1,7 +1,3 @@
-"""
-Test file for BaseGeometry class.
-"""
-
 >>> BaseGeometry = __import__('base_geometry_7_2').BaseGeometry
 >>> bg = BaseGeometry()
 
