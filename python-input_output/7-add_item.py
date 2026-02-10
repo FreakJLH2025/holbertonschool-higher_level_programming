@@ -6,19 +6,15 @@ and saves them to a file in JSON format.
 
 import sys
 from pathlib import Path
-from save_to_json_file import save_to_json_file
-from load_from_json_file import load_from_json_file
+from 5-save_to_json_file import save_to_json_file
+from 6-load_from_json_file import load_from_json_file
 
 filename = "add_item.json"
 
-# If the file exists, load the list; otherwise start with an empty list
 if Path(filename).exists():
     items = load_from_json_file(filename)
 else:
     items = []
 
-# Add all command-line arguments to the list
 items.extend(sys.argv[1:])
-
-# Save the updated list back to the file
 save_to_json_file(items, filename)
