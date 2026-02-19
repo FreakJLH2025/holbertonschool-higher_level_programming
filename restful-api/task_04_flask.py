@@ -51,7 +51,7 @@ def add_user():
     if username in users:
         return jsonify({"error": "Username already exists"}), 409
 
-    # Add user to dictionary
+    # Guardar usuario
     users[username] = {
         "username": username,
         "name": data.get("name"),
@@ -59,7 +59,8 @@ def add_user():
         "city": data.get("city"),
     }
 
-    return jsonify({"message": "User added successfully", "user": users[username]}), 201
+    # Devolver directamente el objeto del usuario
+    return jsonify(users[username]), 201
 
 
 if __name__ == "__main__":
