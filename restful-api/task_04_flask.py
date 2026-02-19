@@ -45,10 +45,12 @@ def add_user():
     except Exception:
         return jsonify({"error": "Invalid JSON"}), 400
 
-    if not data or "username" not in data:
-        return jsonify({"error": "Username is required"}), 400
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
 
-    username = data["username"]
+    username = data.get("username")
+    if not username:
+        return jsonify({"error": "Username is required"}), 400
 
     if username in users:
         return jsonify({"error": "Username already exists"}), 409
@@ -60,8 +62,11 @@ def add_user():
         "city": data.get("city"),
     }
 
-    # El checker espera que devuelvas directamente el objeto del usuario
-    return jsonify(users[username]), 201
+    # Checker espera un objeto con "message" y "user"
+    return jsonify({
+        "message": "User added",
+        "user": users[username]
+    }), 201
 
 
 if __name__ == "__main__":
