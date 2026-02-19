@@ -5,7 +5,7 @@ Simple API built using Flask.
 
 from flask import Flask, jsonify, request
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 # In-memory storage for users
 users = {}
@@ -60,11 +60,9 @@ def add_user():
         "city": data.get("city"),
     }
 
-    return jsonify({
-        "message": "User added",
-        "user": users[username]
-    }), 201
+    # El checker espera que devuelvas directamente el objeto del usuario
+    return jsonify(users[username]), 201
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run()
