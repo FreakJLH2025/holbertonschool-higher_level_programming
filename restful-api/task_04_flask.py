@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """
-Simple Flask API with multiple endpoints.
+Simple API built using Flask.
 """
 
 from flask import Flask, jsonify, request
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 # In-memory storage for users
 users = {}
@@ -13,22 +13,25 @@ users = {}
 
 @app.route("/")
 def home():
+    """Root endpoint."""
     return "Welcome to the Flask API!"
-
-
-@app.route("/data")
-def get_data():
-    # Return a list of all usernames
-    return jsonify(list(users.keys()))
 
 
 @app.route("/status")
 def status():
+    """Status endpoint."""
     return "OK"
+
+
+@app.route("/data")
+def get_data():
+    """Return list of all usernames."""
+    return jsonify(list(users.keys()))
 
 
 @app.route("/users/<username>")
 def get_user(username):
+    """Return full object for a given username."""
     if username in users:
         return jsonify(users[username])
     return jsonify({"error": "User not found"}), 404
@@ -36,22 +39,20 @@ def get_user(username):
 
 @app.route("/add_user", methods=["POST"])
 def add_user():
+    """Add a new user via POST request."""
     try:
-        data = request.get_json()
+        data = request.get_json(force=True)
     except Exception:
         return jsonify({"error": "Invalid JSON"}), 400
 
-    if not data:
-        return jsonify({"error": "Invalid JSON"}), 400
-
-    username = data.get("username")
-    if not username:
+    if not data or "username" not in data:
         return jsonify({"error": "Username is required"}), 400
+
+    username = data["username"]
 
     if username in users:
         return jsonify({"error": "Username already exists"}), 409
 
-    # Guardar usuario
     users[username] = {
         "username": username,
         "name": data.get("name"),
@@ -59,9 +60,11 @@ def add_user():
         "city": data.get("city"),
     }
 
-    # Devolver directamente el objeto del usuario
-    return jsonify(users[username]), 201
+    return jsonify({
+        "message": "User added",
+        "user": users[username]
+    }), 201
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run()
